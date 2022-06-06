@@ -1,6 +1,7 @@
 import random
-from models import RPS
+from models import RPS, RPS_EMOJI
 
 
 def get_result():
-    return RPS[random.randint(0, 2)]
+    num = random.randint(0, 2)
+    return [RPS[num], RPS_EMOJI.get(num, 0)]
