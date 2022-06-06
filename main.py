@@ -14,4 +14,6 @@ async def on_startup(dp):
 
 if __name__ == '__main__':
     # Launch bot
-    executor.start_polling(dispatcher=dp, skip_updates=True, on_startup=on_startup)
+    executor.start_polling(dispatcher=dp,
+                           skip_updates=True,
+                           on_startup=on_startup)
