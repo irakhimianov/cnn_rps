@@ -7,4 +7,4 @@ from util import *
 
 @dp.message_handler(CommandStart())
 async def cmd_start(message: types.Message):
-    await bot.send_message('hi')
+    await bot.send_message(text='hi', chat_id=message.from_user.id)
