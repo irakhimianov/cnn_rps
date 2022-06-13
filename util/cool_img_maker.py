@@ -46,25 +46,28 @@ def text_align(image: Image, font: ImageFont, text: str, pos: str, width: int = 
 def make_result_img(player_text: str, bot_text: str) -> BytesIO:
     # font_path = Path('static', 'fonts', 'Symbola_hint.ttf')
     font_path = (r'../static/fonts/Symbola_hint.ttf')
-    font = ImageFont.truetype(str(font_path), size=72)
+    font = ImageFont.truetype(str(font_path), size=172)
 
     # player_img_path = Path('static', 'temp.jpg')
     player_img_path = (r'../static/temp.jpg')
     player_img = Image.open(player_img_path)
-    player_img = player_img.resize(size=(150, 150))
+    s = player_img.size
+    width = 300
+    height = int(s[1] * (width / s[0]))
+    player_img = player_img.resize(size=(width, height))
 
     # res_img_path = Path('static', 'result_image.jpg')
     res_img_path = (r'../static/result_image.jpg')
     with Image.open(res_img_path) as image:
-        image.paste(player_img, (256 - 75, 512 - 75))
+        image.paste(player_img, (256 - width // 2, 550 - height // 2))
         # player
         xy = text_align(image, font, player_text, 'h', width=512)
         image = add_text(image, (xy, 512), player_text, font)
         #bot
         xy = text_align(image, font, bot_text, 'h', width=1512)
         image = add_text(image, (xy, 512), bot_text, font)
-
-        image.save(Path('static', 'cool_img.jpg'))
+        image.show()
+        # image.save(Path('static', 'cool_img.jpg'))
 
     player_img.close()
 
