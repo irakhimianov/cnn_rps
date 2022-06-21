@@ -45,11 +45,9 @@ def text_align(image: Image, font: ImageFont, text: str, pos: str, width: int = 
 
 def make_result_img(player_text: str, bot_text: str) -> BytesIO:
     font_path = Path('static', 'fonts', 'Symbola_hint.ttf')
-    # font_path = (r'../static/fonts/Symbola_hint.ttf')
     font = ImageFont.truetype(str(font_path), size=172)
 
     player_img_path = Path('static', 'temp.jpg')
-    # player_img_path = (r'../static/temp.jpg')
     player_img = Image.open(player_img_path)
     s = player_img.size
     width = 300
@@ -57,7 +55,6 @@ def make_result_img(player_text: str, bot_text: str) -> BytesIO:
     player_img = player_img.resize(size=(width, height))
 
     res_img_path = Path('static', 'result_image.jpg')
-    # res_img_path = (r'../static/result_image.jpg')
     with Image.open(res_img_path) as image:
         image.paste(player_img, (256 - width // 2, 550 - height // 2))
         # player
@@ -66,8 +63,6 @@ def make_result_img(player_text: str, bot_text: str) -> BytesIO:
         #bot
         xy = text_align(image, font, bot_text, 'h', width=1512)
         image = add_text(image, (xy, 512), bot_text, font)
-        # image.show()
-        # image.save(Path('static', 'cool_img.jpg'))
 
     player_img.close()
     # image to bytes
@@ -77,6 +72,3 @@ def make_result_img(player_text: str, bot_text: str) -> BytesIO:
     image_bio.seek(0)
 
     return image_bio
-
-
-# make_result_img('✋', '✌')
